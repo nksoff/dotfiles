@@ -1,0 +1,96 @@
+###
+## .gitconfig
+###
+
+[core]
+  excludesfile = ~/.gitignore-global
+  editor = vim
+
+[user]
+	name = Nikita
+	email = nks.off@gmail.com
+
+[push]
+  default = current
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+
+[log]
+  date = relative
+
+[alias]
+
+  # commiting
+  c = commit # just commit
+  ca = commit -a # commit all changes
+  amend = commit --amend # amend last commit
+
+  a = add
+
+  # branching
+  b = branch -v # branches with short info
+
+  cb = checkout -b # checkout a new branch
+  co = checkout # just checkout branch
+
+  # diff
+  d = diff --color-words # diff with colored changes (deleted and added)
+  last = diff HEAD^ # last commit info
+
+  # logs
+  filelog = log -u # log with diff
+  #just cool log
+  l = log --graph --pretty=format:'%C(magenta)%h%C(blue)%d%Creset %s %C(blue bold)- %an, %ar%Creset'
+  ll = log --stat --abbrev-commit # log with list of changed files
+
+  # pulling
+  pl = pull # just pull
+  plr = pull --rebase # pull with rebase
+
+  # pushing
+  ps = push # just push
+  psf = push -f # force push
+
+  # rebase
+  reb = "!r() { git rebase -i HEAD~$1; }; r" # rebase last n commits (reb 5 = rebase to HEAD~5)
+
+  # reflog
+  rfl = reflog
+
+  # reset
+  rst = reset --hard
+
+  # stashing
+  ss = stash # save stash
+  sl = stash list # list of stashes
+  sa = stash apply # apply stash
+  sd = stash drop # delete stash
+
+  # status
+  stat = status -s # short status
+  st = status --short --branch --untracked-files=no # short status but do not show untracked files
+  sta = status --short --branch --untracked-files=normal # short status (show all files)
+
+  # tagging
+  tags = tag -l # list
+
+# github <3
+[url "http://github.com/"]
+  insteadOf = "gh:"
+[url "git@github.com:"]
+  pushInsteadOf = "https://github.com/"
+  pushInsteadOf = "http://github.com/"
+  pushInsteadOf = "gh:"
+[url "https://gist.github.com/"]
+  insteadOf = "gist:"
+[url "git@gist.github.com:"]
+  pushInsteadOf = "https://gist.github.com/"
+  pushInsteadOf = "http://gist.github.com/"
+  pushInsteadOf = "gist:"
+
+# i can include my local gitconfig
+[include]
+  path = ~/.git.local
