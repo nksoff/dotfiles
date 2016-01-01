@@ -1,0 +1,13 @@
+###
+## .editorconfig
+## single configuration for all editors
+###
+
+root = true
+
+[*]
+charset = utf-8
+indent_style = spaces
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
