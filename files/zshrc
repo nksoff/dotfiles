@@ -1,0 +1,247 @@
+###
+## .zshrc
+###
+
+# it's executed in background
+{
+    # compile the completion dump to increase startup speed.
+    zcompdump="$HOME/.zcompdump"
+    if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+        zcompile "$zcompdump"
+    fi
+} &!
+
+
+
+#
+# [paths]
+#
+typeset -gU cdpath fpath mailpath path
+
+# where zsh searches directories to change directory
+cdpath=(
+$cdpath
+)
+
+# where zsh searches for functions
+fpath=(
+~/.zsh.prompts
+$fpath
+)
+
+# where zsh searches for programs
+path=(
+/usr/local/{bin,sbin}
+/opt/local/{bin,sbin}
+/usr/local/{php5,mysql}/bin
+/usr/{bin,sbin}
+~/.rvm/bin
+~/.rbenv/bin
+~/.bin/local
+~/.bin
+~/bin
+$path
+)
+
+
+
+#
+# [prezto]
+#
+
+# source Prezto
+if [[ -s "$HOME/.zprezto/init.zsh" ]]; then
+    source "$HOME/.zprezto/init.zsh"
+fi
+
+
+
+#
+# [functions]
+#
+
+# hostname
+hn() {
+    tmphost=${$(uname -n)%.local}
+    if [ -f ~/.hostname ]; then
+        tmphost=$(cat ~/.hostname)
+    fi
+    echo $tmphost | tr 'A-Z' 'a-z'
+}
+
+# realpath to file/directory
+realpath() { for f in "$@"; do echo ${f}(:A); done }
+
+
+
+#
+# [variables]
+#
+
+(( ${+OS} ))        || export OS="${OSTYPE%%[0-9.]*}"
+(( ${+OSVERSION} )) || export OSVERSION="${OSTYPE#$OS}"
+(( ${+OSMAJOR} ))   || export OSMAJOR="${OSVERSION%%.*}"
+(( ${+HOSTNAME} ))  || export HOSTNAME=$(hn)
+
+# browser
+if [[ "$OSTYPE" == darwin* ]]; then
+    export BROWSER='open'
+fi
+
+# editors
+if which vim &> /dev/null; then
+    # vim
+    export EDITOR="vim"
+elif which vi &> /dev/null; then
+    # vi
+    export EDITOR="vi"
+fi
+
+# visual & pager
+export VISUAL=$EDITOR
+export PAGER='less'
+
+# less options
+export LESS='-F -g -i -M -R -S -w -X -z-4'
+
+# temporary directory
+if [[ ! -d "$TMPDIR" ]]; then
+    export TMPDIR="/tmp/$USER"
+    mkdir -p -m 700 "$TMPDIR"
+fi
+
+# temporary directory for zsh
+TMPPREFIX="${TMPDIR%/}/zsh"
+if [[ ! -d "$TMPPREFIX" ]]; then
+    mkdir -p "$TMPPREFIX"
+fi
+
+# user file creation mode mask
+# 775, 664 by default
+umask 0002
+
+
+
+#
+# [completions]
+#
+
+autoload -U compinit
+compinit -i -u
+
+# match uppercase from lowercase.
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# don't insert tabs
+zstyle ':completion:*' insert-tab false
+
+#
+# [aliases]
+#
+case ${OS} in
+    freebsd|darwin)
+        # First letter: foreground. Second: background.
+        # a -- black
+        # b -- red
+        # c -- green
+        # d -- brown
+        # e -- blue
+        # f -- magenta
+        # g -- cyan
+        # h -- light gray
+        # A -- bold black, usually shows up as dark gray
+        # B -- bold red
+        # C -- bold green
+        # D -- bold brown, usually shows up as yellow
+        # E -- bold blue
+        # F -- bold magenta
+        # G -- bold cyan
+        # H -- bold light gray; looks like bright white
+        # x -- default foreground or background
+        # Order:
+        # 01) DIR
+        # 02) SYM_LINK
+        # 03) SOCKET
+        # 04) PIPE
+        # 05) EXE
+        # 06) BLOCK_SP
+        # 07) CHAR_SP
+        # 08) EXE_SUID
+        # 09) EXE_GUID
+        # 10) DIR_STICKY
+        # 11) DIR_WO_STICKY
+        export LSCOLORS="GxFxFxdxCxDxDxhbadExEx"
+        export CLICOLORS="YES"
+        alias ls='ls -G'
+
+        alias psa='ps -wwaxo user,ruser,pid,ppid,pri,pcpu,pmem,vsize,rss,tt,start,args'
+        alias psme='ps -U ${LOGNAME} -wwaxo user,ruser,pid,ppid,pri,pcpu,pmem,vsize,rss,tt,start,args'
+        ;;
+    linux-gnu)
+        alias ls='ls --color=auto'
+        alias psa='ps -eo user,ruser,pid,ppid,pri,pcpu,pmem,vsize,rss,tt,start,args'
+        alias psme='psa | grep -E "^USER|${LOGNAME}"'
+        ;;
+esac
+
+# grep
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+
+# vim
+if which vim &> /dev/null; then
+    alias v="vim"
+    alias vi="vim"
+fi
+
+# cp, mv, rm
+# with confirmations not to lose some files
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="rm -i"
+
+# directory size
+alias ds="du -sh"
+# all files in directory sizes
+alias dsa="\du -ah"
+
+# creating directories
+alias mcd='f () { mkdir -p $1 && cd $1; }; f '
+alias mkdir='mkdir -p'
+
+# listing
+alias la='ls -al'
+alias ll='ls -l'
+alias lsa='ls -ld .*'
+
+# please, root
+alias please="sudo"
+
+# exit vim-like
+alias :q="exit"
+alias :qa="exit"
+
+# git noglob
+alias git='noglob git'
+
+# logtail
+alias logtail='tail -f'
+
+
+
+#
+# [key bindings]
+#
+bindkey "^[[A" up-line-or-search            # up arrow: back-history-search
+bindkey "^[[B" down-line-or-search          # down arrow: fwd-history-search
+
+
+
+#
+# [local]
+#
+
+# source local config
+if [[ -s ~/.zsh.local ]]; then
+    source ~/.zsh.local
+fi
