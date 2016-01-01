@@ -1,0 +1,406 @@
+"""
+"" .vimrc
+"""
+
+"
+" [general]
+"
+
+set nocompatible " kill vi
+set nonumber " no line numbers
+set backspace=indent,eol,start " allow back
+set history=2000 " available history
+set visualbell " no sounds!
+set autoread " autoloading outside changed files
+set hidden " allow to edit some files at the same time not saving
+set wrap " do not break words on division
+set linebreak " break line if is too long
+let &sbr = nr2char(8618).' ' " line break symbol
+set title " change window title
+set ruler " show a ruler panel
+set nolist " no display \n = $, \t = ^I
+set nostartofline " don’t reset cursor to start of line when moving around.
+set noeol " no end of line at the end of files
+
+if has("syntax")
+    syntax enable
+    set t_Co=256 " 256 colors
+    set background=dark
+    silent! colorscheme solarized
+endif
+
+"
+" [status line]
+"
+if has('statusline')
+    set laststatus=2
+endif
+
+"
+" [encoding]
+"
+set encoding=utf-8 " utf-8
+set fileencodings=utf-8,cp1251 " allow also win-1251
+
+"
+" [search]
+"
+if has("extra_search")
+    set incsearch " show searched pattern as you type
+    set hlsearch " highlight previous search pattern
+    set ignorecase " search: nikita = NIKITA
+    set smartcase " /nikita = nIkita but /nIkita != nikita
+    set gdefault " /g flag for search is default, replace all occurrences, not the first
+endif
+
+"
+" [swap/backup/undo files]
+"
+set nobackup " no backup
+set noswapfile " no swap
+
+" undo history
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+set undodir=~/.vim/backups
+set undofile
+
+" viminfo file
+if has("viminfo")
+    " file marks
+    set viminfo='100
+    " don't save registers
+    set viminfo+=<0
+    " don't save input-line history
+    set viminfo+=@0
+    " don't highlight previous search at runtime
+    set viminfo+=h
+    " keep viminfo in ~/.vim
+    set viminfo+=n~/.vim/info
+endif
+
+"
+" [indent]
+"
+set tabstop=4 " Tab = 4 spaces
+set softtabstop=4 " Tab while insert = 4 spaces, not <Tab>
+set shiftwidth=4 " number of spaces while auto indent
+set autoindent " indent from previous line is copied
+set expandtab " Tab while insert = spaces, <Tab> = CTRL-V<Tab>
+set smarttab " Tab in front of line inserts 'shiftwidth' spaces
+
+"
+" [completion]
+"
+set showcmd " show commands completion down the bottom
+set showmode " show current mode down the bottom
+
+if has("wildmenu")
+    set wildmode=list:longest,full " allow completion
+    set wildmenu
+
+    set wildignore+=.git " ignore some useless files during completion
+    set wildignore+=*.DS_Store
+    set wildignore+=._*
+    set wildignore+=*vim/backups*
+    set wildignore+=*DS_Store*
+    set wildignore+=log/**
+    set wildignore+=tmp/**
+    set wildignore+=*.png,*.jpg,*.gif,*.jpeg
+
+    set completeopt+=preview
+endif
+
+"
+" [scrolling]
+"
+set scrolloff=8 " start scrolling when we're 8 lines away from margins
+set sidescrolloff=18
+set sidescroll=1
+
+"
+" [autocommands]
+"
+if has("autocmd")
+    filetype plugin on
+    " change pwd to current directory
+    au BufEnter * execute ":silent! lcd " . expand("%:p:h")
+    au BufRead,BufNewFile *.spt set filetype=html " *.spt = html files
+    au BufRead,BufNewFile *.json set filetype=json syntax=javascript
+    au BufRead,BufNewFile *vimvundle* set filetype=vim
+endif
+
+"
+" [key mappings]
+"
+
+let mapleader = ','
+
+" // - no highlight
+nmap <silent> // :nohlsearch<CR><Esc>
+" <Tab> - next tab
+nmap <Tab> gt
+" <Shift><Tab> - previous tab
+nmap <S-Tab> gT
+" search improvement (centering of results)
+nmap n nzz
+nmap N Nzz
+nmap * *zz
+nmap # #zz
+nmap g* g*zz
+nmap g# g#zz
+" Y - yank up to the end of line
+nnoremap Y y$
+" <C-l> in insert mode - " => "
+imap <c-l> <space>=><space>
+" :w!! - save as sudo
+cmap w!! w !sudo tee % >/dev/null
+
+" ,p - paste form clipboard
+set pastetoggle=<Leader>p
+" ,r - redo
+map <leader>r :redo<CR>
+" ,s - replace template
+map <leader>s :%s//<left>
+" ,yw - copy word
+nnoremap <leader>yw yiww
+" ,. - go last edited line
+nnoremap <leader>. '.
+
+" ,N - show line numbers
+function! NumberToggle()
+    if &nu == 1
+        set rnu
+    elseif &rnu == 1
+        set nornu
+    else
+        set nu
+    endif
+endfunc
+
+nnoremap <Leader>N :call NumberToggle()<cr>
+
+" ,vr - reload vim
+nmap <silent> <leader>vr :so %<CR>
+
+" create splits (vv - vertical, s - horisontal)
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
+
+" <ctrl-{hjkl}> = move between splits
+nnoremap <silent> <c-h> <c-w><c-h>
+nnoremap <silent> <c-j> <c-w><c-j>
+nnoremap <silent> <c-k> <c-w><c-k>
+nnoremap <silent> <c-l> <c-w><c-l>
+
+" right hjkl navigation in insert mode
+imap <c-h> <left>
+imap <c-j> <down>
+imap <c-k> <up>
+imap <c-l> <right>
+" <C-e> -> end of line
+" <C-a> -> start of line
+cnoremap <C-e> <end>
+imap     <C-e> <c-o>$
+cnoremap <C-a> <home>
+imap     <C-a> <c-o>^
+
+" ,wh - strip trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+nnoremap <silent> <leader>wh :call <SID>StripTrailingWhitespaces()<CR>
+
+"
+" [vundle plugins]
+"
+" load vundle core itself
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+"
+" [ruby]
+"
+Plugin 'vim-ruby/vim-ruby'
+
+"
+" [js]
+"
+Plugin 'pangloss/vim-javascript'
+Plugin 'leshill/vim-json'
+Plugin 'itspriddle/vim-jquery'
+autocmd BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+
+"
+" [css]
+"
+Plugin 'JulesWang/css.vim'
+Plugin 'hail2u/vim-css3-syntax'
+" less
+Plugin 'groenewege/vim-less'
+" stylus
+Plugin 'wavded/vim-stylus'
+
+"
+" [html/xml]
+"
+Plugin 'othree/html5.vim'
+Plugin 'othree/html5-syntax.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'Valloric/MatchTagAlways'
+"
+" [jade]
+"
+Plugin 'digitaltoad/vim-jade'
+"
+" [haml]
+"
+Plugin 'tpope/vim-haml'
+
+"
+" [yaml]
+"
+Plugin 'ingydotnet/yaml-vim'
+
+"
+" [markdown]
+"
+Plugin 'tpope/vim-markdown'
+au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+
+"
+" [php]
+"
+Plugin 'StanAngeloff/php.vim'
+if has("autocmd")
+    function! PhpSyntaxOverride()
+        hi! def link phpDocTags  phpDefine
+        hi! def link phpDocParam phpType
+    endfunction
+    augroup phpSyntaxOverride
+        autocmd!
+        autocmd FileType php call PhpSyntaxOverride()
+    augroup END
+endif
+
+"
+" [python]
+"
+Plugin 'hdima/python-syntax'
+Plugin 'vim-scripts/django.vim'
+
+"
+" [nginx]
+"
+Plugin 'nginx.vim'
+au BufRead,BufNewFile *nginx*conf* set filetype=nginx
+
+"
+" [vim improvements]
+"
+
+" matching of tags, { and }, ...
+" % - go to another tag, {, }, ...
+Plugin 'tmhedberg/matchit'
+
+" complettion by <Tab>
+Plugin 'ervandew/supertab'
+
+" taglist
+Plugin 'taglist.vim'
+nnoremap <silent> ± :TlistToggle<CR>
+
+" Ctrl P - finder for vim
+" <Ctrl-P> = open
+" <Ctrl-f>, <Ctrl-b> - switch modes
+" <Ctrl-t> = open file in new tab
+Plugin 'kien/ctrlp.vim'
+
+" ack
+" :Ack [options] [what] [where]
+Plugin 'mileszs/ack.vim'
+
+" .editorconfig support
+Plugin 'editorconfig/editorconfig-vim'
+
+" status line
+Plugin 'bling/vim-airline'
+
+" gS = split a one-liner into multiple lines
+" gJ = join a block into a single-line statement
+Plugin 'AndrewRadev/splitjoin.vim'
+nmap sj :SplitjoinSplit<cr>
+nmap sk :SplitjoinJoin<cr>
+
+" automatically close { [ " etc.
+Plugin 'Raimondi/delimitMate'
+
+" visual search = select word, * or # = search selected
+Plugin 'nelstrom/vim-visual-star-search'
+
+" easy motion
+" ,,w = turn it on
+Plugin 'skwp/vim-easymotion'
+" hi clear EasyMotionTarget
+" hi! EasyMotionTarget guifg=yellow
+nmap <leader><ESC> <leader><leader>w
+nmap <leader><S-ESC> <leader><leader>b
+
+" comments
+" gcc = comment by single-line
+Plugin 'tomtom/tcomment_vim'
+nmap <silent> gcp <c-_>p
+
+" At match # out of N matches
+Plugin 'vim-scripts/IndexedSearch'
+
+" cs"' = change " around to '
+" ds" = remove "
+" yss) = surround line with ()
+Plugin 'tpope/vim-surround'
+
+" file/directory tree
+" ,n = open NERDTree
+Plugin 'scrooloose/nerdtree'
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let g:NERDTreeWinSize = 30
+nmap <leader>n :NERDTreeToggle<CR>
+
+" magic working with text columns
+Plugin 'coderifous/textobj-word-column.vim'
+
+" ,ig = show indents
+Plugin 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+"
+" [color scheme]
+"
+Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end()
+filetype plugin indent on
+
+"
+" [local vim configuration]
+"
+
+if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
