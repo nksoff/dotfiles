@@ -1,0 +1,11 @@
+--type-add=css=.sass,.less,.scss
+--type-add=ruby=.rake,.rsel,.builder,.thor
+--type-add=html=.haml,.html.erb,.html.haml.php
+--type-set=json=.json
+--type-add=js=.js.erb,.coffee
+--type-set=tpl=.tpl
+--smart-case
+--sort-files
+--color
+--follow
+--group
