@@ -1,0 +1,145 @@
+###
+## .zpreztorc
+## configuration for prezto
+###
+
+#
+# General
+#
+
+# set case-sensitivity for completion, history lookup, etc.
+zstyle ':prezto:*:*' case-sensitive 'no'
+
+# color output (auto set to 'no' on dumb terminals).
+zstyle ':prezto:*:*' color 'yes'
+
+# set the Zsh modules to load (man zshmodules).
+zstyle ':prezto:load' zmodule 'attr' 'stat'
+
+# set the Zsh functions to load (man zshcontrib).
+zstyle ':prezto:load' zfunction 'zargs' 'zmv'
+
+# set the Prezto modules to load (browse modules).
+# the order matters.
+zstyle ':prezto:load' pmodule \
+  'spectrum' \
+  'syntax-highlighting' \
+  'environment' \
+  'terminal' \
+  'editor' \
+  'history' \
+  'directory' \
+  'utility' \
+  'completion' \
+  'prompt' \
+  'archive' \
+  'fasd' \
+  'git' \
+  'history-substring-search' \
+  'osx' \
+  'tmux'
+
+#
+# Editor
+#
+
+# set the key mapping style to 'emacs' or 'vi'.
+zstyle ':prezto:module:editor' keymap 'vi'
+
+# auto convert .... to ../..
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+
+#
+# Git
+#
+
+# display information about current repository in a prompt
+zstyle ':prezto:module:git:info:context:subcontext' format 'string'
+
+# ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
+# zstyle ':prezto:module:git:status:ignore' submodules 'all'
+
+#
+# GNU Utility
+#
+
+# set the command prefix on non-GNU systems.
+# zstyle ':prezto:module:gnu-utility' prefix 'g'
+
+#
+# History Substring Search
+#
+
+# set the query found color.
+zstyle ':prezto:module:history-substring-search:color' found ''
+
+# set the query not found color.
+zstyle ':prezto:module:history-substring-search:color' not-found ''
+
+# set the search globbing flags.
+zstyle ':prezto:module:history-substring-search' globbing-flags ''
+
+#
+# Pacman
+#
+
+# set the Pacman frontend.
+# zstyle ':prezto:module:pacman' frontend 'yaourt'
+
+#
+# Prompt
+#
+
+# set the prompt theme to load.
+# setting it to 'random' loads a random theme.
+# auto set to 'off' on dumb terminals.
+zstyle ':prezto:module:prompt' theme 'nksoff'
+
+#
+# Screen
+#
+
+# auto start a session when Zsh is launched.
+# zstyle ':prezto:module:screen' auto-start 'yes'
+
+#
+# SSH
+#
+
+# set the SSH identities to load into the agent.
+# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+
+#
+# syntax Highlighting
+#
+
+# set syntax highlighters.
+# by default, only the main highlighter is enabled.
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+   'main' \
+   'brackets' \
+   'pattern' \
+   'cursor' \
+   'root'
+
+# set syntax highlighting styles.
+zstyle ':prezto:module:syntax-highlighting' styles \
+   'builtin' 'bg=blue' \
+   'command' 'bg=blue' \
+   'function' 'bg=blue'
+
+
+#
+# Terminal
+#
+
+# auto set the tab and window titles.
+#zstyle ':prezto:module:terminal' auto-title 'yes'
+
+#
+# Tmux
+#
+
+# auto start a session when Zsh is launched.
+#zstyle ':prezto:module:tmux' auto-start 'yes'
+
