@@ -1,0 +1,13 @@
+#!/bin/bash
+###
+## creating or attaching named sessions in tmux
+## 
+## attach/create session with name
+## $ tm session_name
+##
+## attach/create session with name of current path
+## $ tm
+###
+
+[[ -z "$1" ]] && name=$(basename $PWD) || name="$1"
+tmux has -t $name 2>/dev/null && tmux attach -t $name || tmux new -s $name

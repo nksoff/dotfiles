@@ -1,0 +1,8 @@
+#!/bin/sh
+###
+## adds file executable options
+## 
+## $ +x file.sh
+###
+
+exec chmod +x "$@"

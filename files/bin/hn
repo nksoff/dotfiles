@@ -1,0 +1,46 @@
+#!/bin/bash
+###
+## prints normal hostname
+## 
+## small case
+## $ hn
+## usual case
+## $ hn -f
+###
+
+show_usage() {
+  echo "Usage: hn [-h] [-f]"
+}
+
+show_help() {
+  echo "prints normal hostname"
+  show_usage
+}
+
+short=1
+
+# parse args
+while [[ $1 == -* ]]; do
+  case "$1" in
+    -f) short=0; break;;
+    -h|--help) show_help; exit 0; break;;
+    *) echo "wrong option $1"; show_usage; exit 1; break;;
+  esac
+done
+
+# get usual name
+tmphost=$(uname -n)
+tmphost=${tmphost%.local}
+
+# if exists ~/.hostname, read from it
+if [ -f ~/.hostname ]; then
+  tmphost=$(cat ~/.hostname)
+fi
+
+# small case
+if [ $short == 1 ]; then
+  tmphost=$(echo $tmphost | tr 'A-Z' 'a-z')
+fi
+
+# output
+echo $tmphost
