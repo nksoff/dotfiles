@@ -1,25 +1,11 @@
 ---
 - hosts: all
   tasks:
-    - name: clone zprezto
-      git:
-        repo: 'https://github.com/sorin-ionescu/prezto.git'
-        dest: '~/.zprezto'
-        recursive: yes
-
-    - name: create a .vim directory
-      file: path=~/.vim state=directory
-
-    - name: clone vim plugin manager
-      git:
-        repo: 'https://github.com/VundleVim/Vundle.vim.git'
-        dest: '~/.vim/bundle/Vundle.vim'
-
     - name: copy dotfiles
-      copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} force=no
+      copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} backup=yes
       with_items:
         - ackrc
-        - bin
+        - bin/
         - curlrc
         - editorconfig
         - gemrc
@@ -34,8 +20,22 @@
         - git.local
         - zshrc.local
 
-    - name: create a .bin.local directory
-      file: path=~/.bin.local state=directory
+    - name: create some directories
+      file: path=~/.{{ item }} state=directory
+      with_items:
+        - bin.local
+        - vim
+
+    - name: clone zprezto
+      git:
+        repo: 'https://github.com/sorin-ionescu/prezto.git'
+        dest: '~/.zprezto'
+        recursive: yes
+
+    - name: clone vim plugin manager
+      git:
+        repo: 'https://github.com/VundleVim/Vundle.vim.git'
+        dest: '~/.vim/bundle/Vundle.vim'
 
     - name: install vim plugins
       command: vim -i NONE -c PluginInstall -c PluginClean! -c quitall
