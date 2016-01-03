@@ -37,7 +37,7 @@ path=(
 /usr/{bin,sbin}
 ~/.rvm/bin
 ~/.rbenv/bin
-~/.bin/local
+~/.bin.local
 ~/.bin
 ~/bin
 $path

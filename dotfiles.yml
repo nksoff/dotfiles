@@ -19,6 +19,7 @@
       copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} force=no
       with_items:
         - ackrc
+        - bin.local
         - curlrc
         - editorconfig
         - gemrc
@@ -32,6 +33,9 @@
         - zsh.prompts/
         - git.local
         - zshrc.local
+
+    - name: create a .bin.local directory
+      file: path=~/.bin.local state=directory
 
     - name: install vim plugins
       command: vim -i NONE -c PluginInstall -c PluginClean! -c quitall
