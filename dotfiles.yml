@@ -1,28 +1,6 @@
 ---
 - hosts: all
   tasks:
-    - name: make links to dotfiles
-      file: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} state=link
-      with_items:
-        - ackrc
-        - curlrc
-        - editorconfig
-        - gemrc
-        - gitconfig
-        - gitignore-global
-        - hushlogin
-        - tmux.conf
-        - vimrc
-        - zpreztorc
-        - zshrc
-        - zsh.prompts
-
-    - name: copy local dotfiles templates
-      copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} force=no
-      with_items:
-        - git.local
-        - zshrc.local
-
     - name: clone zprezto
       git:
         repo: 'https://github.com/sorin-ionescu/prezto.git'
@@ -36,6 +14,24 @@
       git:
         repo: 'https://github.com/VundleVim/Vundle.vim.git'
         dest: '~/.vim/bundle/Vundle.vim'
+
+    - name: copy dotfiles
+      copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} force=no
+      with_items:
+        - ackrc
+        - curlrc
+        - editorconfig
+        - gemrc
+        - gitconfig
+        - gitignore-global
+        - hushlogin
+        - tmux.conf
+        - vimrc
+        - zpreztorc
+        - zshrc
+        - zsh.prompts/
+        - git.local
+        - zshrc.local
 
     - name: install vim plugins
       command: vim -i NONE -c PluginInstall -c PluginClean! -c quitall
