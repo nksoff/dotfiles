@@ -46,17 +46,6 @@ $path
 
 
 #
-# [prezto]
-#
-
-# source Prezto
-if [[ -s "$HOME/.zprezto/init.zsh" ]]; then
-    source "$HOME/.zprezto/init.zsh"
-fi
-
-
-
-#
 # [functions]
 #
 
@@ -71,6 +60,17 @@ hn() {
 
 # realpath to file/directory
 realpath() { for f in "$@"; do echo ${f}(:A); done }
+
+
+
+#
+# [prezto]
+#
+
+# source Prezto
+if [[ -s "$HOME/.zprezto/init.zsh" ]]; then
+    source "$HOME/.zprezto/init.zsh"
+fi
 
 
 
