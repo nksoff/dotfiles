@@ -19,7 +19,7 @@
       copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} force=no
       with_items:
         - ackrc
-        - bin.local
+        - bin
         - curlrc
         - editorconfig
         - gemrc
