@@ -39,3 +39,8 @@
 
     - name: install vim plugins
       command: vim -i NONE -c PluginInstall -c PluginClean! -c quitall
+
+    - name: clone tmux plugin manager
+      git:
+        repo: 'https://github.com/tmux-plugins/tpm'
+        dest: '~/.tmux/plugins/tpm'
