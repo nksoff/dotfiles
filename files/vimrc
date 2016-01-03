@@ -204,6 +204,16 @@ imap     <C-e> <c-o>$
 cnoremap <C-a> <home>
 imap     <C-a> <c-o>^
 
+" turn off the arrows
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+inoremap <Left>  <NOP>
+inoremap <Right> <NOP>
+noremap  <Up>    <NOP>
+noremap  <Down>  <NOP>
+noremap  <Left>  <NOP>
+noremap  <Right> <NOP>
+
 " ,wh - strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
@@ -272,6 +282,7 @@ Plugin 'tpope/vim-haml'
 " [yaml]
 "
 Plugin 'ingydotnet/yaml-vim'
+Plugin 'chase/vim-ansible-yaml'
 
 "
 " [markdown]
