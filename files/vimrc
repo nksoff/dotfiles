@@ -193,10 +193,10 @@ nnoremap <silent> <c-k> <c-w><c-k>
 nnoremap <silent> <c-l> <c-w><c-l>
 
 " right hjkl navigation in insert mode
-imap <c-h> <left>
-imap <c-j> <down>
-imap <c-k> <up>
-imap <c-l> <right>
+inoremap <c-h> <left>
+inoremap <c-j> <down>
+inoremap <c-k> <up>
+inoremap <c-l> <right>
 " <C-e> -> end of line
 " <C-a> -> start of line
 cnoremap <C-e> <end>
