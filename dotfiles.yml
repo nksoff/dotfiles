@@ -1,40 +1,39 @@
 ---
 - hosts: all
+  vars:
+    dotfiles_dir: '~/.dotfiles'
   tasks:
-    - name: copy dotfiles
-      copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} backup=yes
-      with_items:
-        - ackrc
-        - bin/
-        - curlrc
-        - editorconfig
-        - gemrc
-        - gitconfig
-        - gitignore-global
-        - hushlogin
-        - tmux.conf
-        - vimrc
-        - zpreztorc
-        - zshrc
-        - zsh.prompts/
-        - git.local
-        - zshrc.local
+    - name: clone dotfiles repo to local ~/.dotfiles
+      git:
+        repo: 'git@github.com:nksoff/dotfiles.git'
+        accept_hostkey: yes
+        dest: '{{ dotfiles_dir }}'
 
-    - name: create some directories
-      file: path=~/.{{ item }} state=directory
-      with_items:
-        - bin.local
-        - vim
+    - name: detect dotfiles to be linked
+      shell: ls {{ dotfiles_dir }}/files | grep -v '.local'
+      register: dotfiles_link
+
+    - name: detect dotfiles to be copied
+      shell: ls {{ dotfiles_dir }}/files | grep '.local'
+      register: dotfiles_copy
+
+    - name: link dotfiles to be linked
+      file: src={{ dotfiles_dir }}/files/{{ item }} dest=~/.{{ item }} state=link force=yes
+      with_items: '{{ dotfiles_link.stdout_lines }}'
+
+    - name: copy dotfiles to be copied
+      copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} force=no
+      with_items: '{{ dotfiles_copy.stdout_lines }}'
 
     - name: clone zprezto
       git:
-        repo: 'https://github.com/sorin-ionescu/prezto.git'
+        repo: 'git@github.com:sorin-ionescu/prezto.git'
         dest: '~/.zprezto'
         recursive: yes
 
     - name: clone vim plugin manager
       git:
-        repo: 'https://github.com/VundleVim/Vundle.vim.git'
+        repo: 'git@github.com:VundleVim/Vundle.vim.git'
         dest: '~/.vim/bundle/Vundle.vim'
 
     - name: install vim plugins
@@ -42,5 +41,5 @@
 
     - name: clone tmux plugin manager
       git:
-        repo: 'https://github.com/tmux-plugins/tpm'
+        repo: 'git@github.com:tmux-plugins/tpm'
         dest: '~/.tmux/plugins/tpm'
