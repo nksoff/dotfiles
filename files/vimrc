@@ -288,7 +288,11 @@ Plugin 'chase/vim-ansible-yaml'
 " [markdown]
 "
 Plugin 'tpope/vim-markdown'
-au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+Plugin 'jtratner/vim-flavored-markdown'
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
 
 "
 " [php]
