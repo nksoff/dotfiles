@@ -5,7 +5,7 @@
   tasks:
     - name: clone dotfiles repo to local ~/.dotfiles
       git:
-        repo: 'git@github.com:nksoff/dotfiles.git'
+        repo: 'https://github.com/nksoff/dotfiles.git'
         accept_hostkey: yes
         dest: '{{ dotfiles_dir }}'
 
@@ -27,13 +27,13 @@
 
     - name: clone antigen
       git:
-        repo: 'git@github.com:zsh-users/antigen.git'
+        repo: 'https://github.com/zsh-users/antigen.git'
         dest: '~/.antigen'
         recursive: yes
 
     - name: clone vim plugin manager
       git:
-        repo: 'git@github.com:VundleVim/Vundle.vim.git'
+        repo: 'https://github.com/VundleVim/Vundle.vim.git'
         dest: '~/.vim/bundle/Vundle.vim'
 
     - name: install vim plugins
@@ -41,5 +41,5 @@
 
     - name: clone tmux plugin manager
       git:
-        repo: 'git@github.com:tmux-plugins/tpm'
+        repo: 'https://github.com/tmux-plugins/tpm'
         dest: '~/.tmux/plugins/tpm'
