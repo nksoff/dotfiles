@@ -2,7 +2,7 @@
 # [antigen]
 #
 
-source ~/.zsh.antigen/antigen.zsh
+source ~/.antigen/antigen.zsh
 
 _zdotdir_set=${+parameters[ZDOTDIR]}
 if (( _zdotdir_set )); then
@@ -10,6 +10,7 @@ if (( _zdotdir_set )); then
 fi
 
 antigen use prezto
+# antigen theme S1cK94/minimal minimal
 
 if (( _zdotdir_set )); then
     ZDOTDIR=$_old_zdotdir
