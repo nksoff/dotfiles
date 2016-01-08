@@ -25,10 +25,10 @@
       copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} force=no
       with_items: '{{ dotfiles_copy.stdout_lines }}'
 
-    - name: clone zprezto
+    - name: clone antigen
       git:
-        repo: 'git@github.com:sorin-ionescu/prezto.git'
-        dest: '~/.zprezto'
+        repo: 'git@github.com:zsh-users/antigen.git'
+        dest: '~/.antigen'
         recursive: yes
 
     - name: clone vim plugin manager
