@@ -22,7 +22,6 @@ make dotfiles
 ## TODO
 
 - describe zsh aliases, vim plugins, etc.
-- add *lighter [faster and more simple]* version of dotfiles
+- add *lite [faster and more simple]* version of dotfiles
 - add ansible playbooks for installing homebrew (with cask), npm packages, gems
 - add tests
-- *maybe bash script for installation, not ansible? ansible is for installation on remote servers only?*
