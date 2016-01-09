@@ -103,8 +103,10 @@ Plugin 'tmhedberg/matchit'
 Plugin 'ervandew/supertab'
 
 " taglist
-Plugin 'taglist.vim'
-nnoremap <silent> ± :TlistToggle<CR>
+if executable('exuberant-ctags') || executable('exctags') || executable('ctags') || executable('ctags.exe') || executable('tags')
+    Plugin 'taglist.vim'
+    nnoremap <silent> ± :TlistToggle<CR>
+endif
 
 " Ctrl P - finder for vim
 " <Ctrl-P> = open
