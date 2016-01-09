@@ -10,7 +10,6 @@ $cdpath
 
 # where zsh searches for functions
 fpath=(
-~/.zsh.prompts
 $fpath
 )
 
