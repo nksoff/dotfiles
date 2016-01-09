@@ -6,11 +6,12 @@ i() { [ -f $1 ] && source $1; }
 
 i ~/.zsh/paths.zsh
 i ~/.zsh/functions.zsh
-i ~/.zsh/antigen.zsh
 i ~/.zsh/variables.zsh
 i ~/.zsh/completions.zsh
 i ~/.zsh/aliases.zsh
 i ~/.zsh/keybindings.zsh
+
+i ~/.zsh/antigen.zsh
 i ~/.zsh/plugins.zsh
 
 #
