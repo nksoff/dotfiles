@@ -1,0 +1,8 @@
+#!/bin/bash
+IFS=$'\n\t'
+
+echo "Starting to remove old files in ~/Downloads"
+
+find ~/Downloads -ctime +100 -d 1 -print0 | xargs -0 rm -r
+
+echo "Done"
