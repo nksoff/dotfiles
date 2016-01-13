@@ -43,3 +43,12 @@
       git:
         repo: 'https://github.com/tmux-plugins/tpm'
         dest: '~/.tmux/plugins/tpm'
+
+    - name: check zsh shell
+      shell: "echo $SHELL | grep 'zsh'"
+      ignore_errors: true
+      register: is_zsh
+
+    - name: inform about zsh changing
+      debug: msg="Do not forget to change your shell to zsh with `chsh -s /bin/zsh`"
+      when: is_zsh|failed
