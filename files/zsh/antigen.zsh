@@ -10,7 +10,6 @@ antigen bundle autojump
 antigen bundle composer
 antigen bundle gem
 antigen bundle brew
-antigen bundle nyan
 antigen bundle vagrant
 antigen bundle docker
 
