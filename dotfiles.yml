@@ -37,7 +37,7 @@
         dest: '~/.vim/bundle/Vundle.vim'
 
     - name: install vim plugins
-      command: vim -i NONE -c PluginInstall -c PluginClean! -c quitall
+      command: vim -i NONE --noplugin -u ~/.vimrc.plugins -N -c PluginInstall -c PluginClean! -c quitall
 
     - name: clone tmux plugin manager
       git:
