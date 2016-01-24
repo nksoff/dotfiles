@@ -65,6 +65,11 @@ augroup markdown
 augroup END
 
 "
+" [raml]
+"
+Plugin 'kennethzfeng/vim-raml'
+
+"
 " [php]
 "
 Plugin 'StanAngeloff/php.vim'
