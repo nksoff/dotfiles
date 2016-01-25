@@ -192,6 +192,10 @@ nnoremap <silent> <c-j> <c-w><c-j>
 nnoremap <silent> <c-k> <c-w><c-k>
 nnoremap <silent> <c-l> <c-w><c-l>
 
+" j,k = move between sublines in long lines
+map j gj
+map k gk
+
 " right hjkl navigation in insert mode
 inoremap <c-h> <left>
 inoremap <c-j> <down>
