@@ -21,6 +21,7 @@ set ruler " show a ruler panel
 set nolist " no display \n = $, \t = ^I
 set nostartofline " don’t reset cursor to start of line when moving around.
 set noeol " no end of line at the end of files
+set textwidth=80 " max width of line is 80
 
 if has("syntax")
     syntax enable
