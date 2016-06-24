@@ -161,7 +161,8 @@ set pastetoggle=<Leader>p
 " ,r - redo
 map <leader>r :redo<CR>
 " ,s - replace template
-map <leader>s :%s//<left>
+nmap <leader>s :%s//<left>
+vmap <leader>s :s//<left>
 " ,yw - copy word
 nnoremap <leader>yw yiww
 " ,. - go last edited line
