@@ -110,7 +110,9 @@ Plugin 'ervandew/supertab'
 " taglist
 if executable('exuberant-ctags') || executable('exctags') || executable('ctags') || executable('ctags.exe') || executable('tags')
     Plugin 'taglist.vim'
-    nnoremap <silent> ± :TlistToggle<CR>
+    let Tlist_GainFocus_On_ToggleOpen = 1
+    nnoremap <silent> ≠ :TlistToggle<CR>
+    nnoremap <silent> » :TlistToggle<CR>
 endif
 
 " Ctrl P - finder for vim
