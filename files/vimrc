@@ -157,7 +157,8 @@ imap <c-l> <space>=><space>
 cmap w!! w !sudo tee % >/dev/null
 
 " ,p - paste form clipboard
-set pastetoggle=<Leader>p
+" set pastetoggle=<Leader>p " how to disable in insert mode?
+nnoremap <leader>p :set invpaste paste?<CR>
 " ,r - redo
 map <leader>r :redo<CR>
 " ,s - replace template
