@@ -10,6 +10,9 @@ case ${OS} in
 
         # clear dns
         alias dns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
+
+        # clearing trashes, remove logs
+        alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv $HOME/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
         ;;
     linux-gnu)
         alias ls='ls --color=auto'
