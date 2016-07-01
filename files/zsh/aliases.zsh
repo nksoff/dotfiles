@@ -64,3 +64,10 @@ alias logtail='tail -f'
 # time helpers
 alias week='date +%V'
 alias timer='echo "Stop me with Ctrl+D" && date && time cat && date'
+
+# hex dump
+command -v hd > /dev/null || alias hd="hexdump -C"
+
+# hashing functions
+command -v md5sum > /dev/null || alias md5sum="md5"
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
