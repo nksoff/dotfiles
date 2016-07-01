@@ -7,6 +7,9 @@ case ${OS} in
 
         alias psa='ps -wwaxo user,ruser,pid,ppid,pri,pcpu,pmem,vsize,rss,tt,start,args'
         alias psme='ps -U ${LOGNAME} -wwaxo user,ruser,pid,ppid,pri,pcpu,pmem,vsize,rss,tt,start,args'
+
+        # clear dns
+        alias dns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
         ;;
     linux-gnu)
         alias ls='ls --color=auto'
