@@ -57,3 +57,7 @@ alias git='noglob git'
 
 # logtail
 alias logtail='tail -f'
+
+# time helpers
+alias week='date +%V'
+alias timer='echo "Stop me with Ctrl+D" && date && time cat && date'
