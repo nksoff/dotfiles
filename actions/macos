@@ -365,8 +365,8 @@ defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -stri
 ###############################################################################
 
 # disable Spotlight
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
-sudo mdutil -a -i off
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist > /dev/null 2>&1
+sudo mdutil -a -i off > /dev/null 2>&1
 
 ###############################################################################
 # Mac App Store                                                               #
