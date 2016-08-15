@@ -17,5 +17,5 @@ if [[ -n $commands[thefuck] ]]; then
 fi
 
 antigen bundle zsh-users/zsh-completions src
-antigen theme nksoff/slim-zsh-theme slim
+antigen theme nksoff/muslim muslim
 antigen bundle zsh-users/zsh-syntax-highlighting
