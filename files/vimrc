@@ -128,6 +128,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.spt set filetype=html " *.spt = html files
     au BufRead,BufNewFile *.json set filetype=json syntax=javascript
     au BufRead,BufNewFile *vimvundle* set filetype=vim
+    au BufRead,BufNewFile *.zsh-theme set filetype=zsh
 endif
 
 "
