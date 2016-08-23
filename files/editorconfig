@@ -13,6 +13,6 @@ tab_width = 4
 end_of_line = lf
 insert_final_newline = true
 
-[{*.yml,Vagrantfile,*.json,*.js,*.nunjucks,*.raml,*.jade,*.pug}]
+[{*.yml,Vagrantfile,*.json,*.js,*.nunjucks,*.raml,*.jade,*.pug,*.zsh-theme}]
 indent_size = 2
 tab_width = 2
