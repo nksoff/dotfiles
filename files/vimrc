@@ -152,8 +152,6 @@ nmap g* g*zz
 nmap g# g#zz
 " Y - yank up to the end of line
 nnoremap Y y$
-" <C-l> in insert mode - " => "
-imap <c-l> <space>=><space>
 " :w!! - save as sudo
 cmap w!! w !sudo tee % >/dev/null
 
