@@ -31,6 +31,8 @@ Plugin 'hail2u/vim-css3-syntax'
 Plugin 'groenewege/vim-less'
 " stylus
 Plugin 'wavded/vim-stylus'
+" scss
+Plugin 'cakebaker/scss-syntax.vim'
 
 "
 " [html/xml]
