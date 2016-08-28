@@ -207,6 +207,13 @@ let g:indent_guides_guide_size = 1
 " showing git changes
 Plugin 'mhinz/vim-signify'
 
+
+" plugins to test
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'mbbill/undotree'
+Plugin 'shawncplus/phpcomplete.vim'
+" end plugins to test
+
 "
 " [color scheme]
 "
