@@ -211,6 +211,8 @@ Plugin 'mhinz/vim-signify'
 " plugins to test
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'mbbill/undotree'
+nnoremap <leader>u :UndotreeToggle<cr>
+
 Plugin 'shawncplus/phpcomplete.vim'
 " end plugins to test
 
