@@ -209,7 +209,10 @@ Plugin 'mhinz/vim-signify'
 
 
 " plugins to test
+let g:bufExplorerDisableDefaultKeyMapping=1
 Plugin 'jlanzarotta/bufexplorer'
+nnoremap <leader>b :BufExplorer<CR>
+
 Plugin 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
 
