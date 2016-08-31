@@ -22,6 +22,7 @@ set nolist " no display \n = $, \t = ^I
 set nostartofline " don’t reset cursor to start of line when moving around.
 set noeol " no end of line at the end of files
 " set textwidth=80 " max width of line is 80
+set colorcolumn=+1 " show line after 80 symbols
 
 if has("syntax")
     syntax enable
