@@ -242,6 +242,9 @@ if filereadable(expand("~/.vimrc.plugins"))
     source ~/.vimrc.plugins
 endif
 
+" color for maxcolumn
+highlight ColorColumn ctermbg=grey
+
 "
 " [local vim configuration]
 "
