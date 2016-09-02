@@ -219,10 +219,6 @@ nnoremap <leader>u :UndotreeToggle<cr>
 Plugin 'shawncplus/phpcomplete.vim'
 " end plugins to test
 
-"
-" [color scheme]
-"
-Plugin 'altercation/vim-colors-solarized'
-
 call vundle#end()
 filetype plugin indent on
+
