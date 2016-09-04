@@ -5,9 +5,6 @@ case ${OS} in
     freebsd|darwin)
         alias ls='ls -G'
 
-        alias psa='ps -wwaxo user,ruser,pid,ppid,pri,pcpu,pmem,vsize,rss,tt,start,args'
-        alias psme='ps -U ${LOGNAME} -wwaxo user,ruser,pid,ppid,pri,pcpu,pmem,vsize,rss,tt,start,args'
-
         # clear dns
         alias dns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
 
@@ -16,8 +13,6 @@ case ${OS} in
         ;;
     linux-gnu)
         alias ls='ls --color=auto'
-        alias psa='ps -eo user,ruser,pid,ppid,pri,pcpu,pmem,vsize,rss,tt,start,args'
-        alias psme='psa | grep -E "^USER|${LOGNAME}"'
         ;;
 esac
 
@@ -49,7 +44,6 @@ alias mkdir='mkdir -p'
 # listing
 alias la='ls -al'
 alias ll='ls -l'
-alias lsa='ls -ld .*'
 
 # please, root
 alias please="sudo"
