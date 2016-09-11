@@ -18,10 +18,3 @@ make dotfiles
 cd ~/.dotfiles
 make dotfiles
 ```
-
-## TODO
-
-- describe zsh aliases, vim plugins, etc.
-- add *lite [faster and more simple]* version of dotfiles
-- add ansible playbooks for installing homebrew (with cask), npm packages, gems
-- add tests
