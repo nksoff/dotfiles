@@ -7,9 +7,9 @@
   editor = vim
   autocrlf = false
 
-[user]
-	name = Nikita
-	email = nks.off@gmail.com
+# [user]
+# 	name = Nikita
+# 	email = nks.off@gmail.com
 
 [push]
   default = current
