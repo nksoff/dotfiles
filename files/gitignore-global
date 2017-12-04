@@ -29,3 +29,6 @@ Desktop.ini
 Session.vim
 .netrwhist
 *~
+
+.idea/
+*.iml
