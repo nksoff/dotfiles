@@ -1,0 +1,47 @@
+# MacOS apps
+
+## GUI apps
+- Google Chrome
+- Opera
+- Firefox
+- iTerm2
+- Atom
+- Sublime Text 2
+- IntelliJ IDEA
+- WebStorm
+- PhpStorm
+- SequelPro
+- Postman
+- Dash
+- Docker
+- VirtualBox
+- Tweetbot
+- Skype
+- Telegram
+- Slack
+- iStudiez Pro
+- Camunda Modeler
+- TouchDraw
+- Dia
+- Daum Equation Editor
+- Dropbox
+- Box Sync
+- Bear
+- Debit & Credit
+- Keka
+- The Unarchiver
+- Tunnelblink
+- uTorrent
+- TeamViewer
+- 1Password
+- FileZilla
+- Alfred 3
+- MacDjView
+- MS Office
+- GIPHY Capture
+- Monosnap
+- Punto Switcher
+- VLC
+- Wireshark
+- Burp Suite Free Edition
+- Arduino
