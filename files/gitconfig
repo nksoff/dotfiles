@@ -46,6 +46,7 @@
   #just cool log
   l = log --graph --pretty=format:'%C(magenta)%h%C(blue)%d%Creset %s %C(blue bold)- %an, %ar%Creset'
   ll = log --stat --abbrev-commit # log with list of changed files
+  wtf = diff --name-only --diff-filter=U
 
   # pulling
   pl = pull # just pull
