@@ -13,6 +13,7 @@ ncdu
 nmap
 tig
 tree
+lazygit
 ```
 
 ## Cask
